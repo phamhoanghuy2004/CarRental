@@ -15,31 +15,42 @@ import org.springframework.web.multipart.MultipartFile;
 import com.javaweb.beans.CarDTO;
 import com.javaweb.service.CarService;
 
-
 @RestController
 @RequestMapping(value = "/api/car")
 public class CarApi {
-	@Autowired
-	private CarService carService;
-	
-	@GetMapping
-	public Object getCarByBrandActive(@RequestParam(value = "idBrand" , required = false) int idBrand) {
-		
-		List<CarDTO> listCar = carService.getCarOfBrandActive(idBrand);
-		return listCar;
-	}
-	
+
+    @Autowired
+    private CarService carService;
+
+
+    @GetMapping
+    public Object getCarByBrandActive(@RequestParam(value = "idBrand", required = false) int idBrand) {
+        List<CarDTO> listCar = carService.getCarOfBrandActive(idBrand);
+        return listCar;
+    }
+
     @PostMapping("/updateLogoCar/{id}")
     public ResponseEntity<?> updateCarLogo(@PathVariable("id") int carId, @RequestParam("file") MultipartFile file) {
         try {
             if (carService.updateLogo(carId, file) == 1) {
-            	return ResponseEntity.ok("Cập nhật logo thành công!");
-            }
-            else {
-            	return ResponseEntity.badRequest().body("Không thể cập nhật");
+                return ResponseEntity.ok("Cập nhật logo thành công!");
+            } else {
+                return ResponseEntity.badRequest().body("Không thể cập nhật");
             }
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Lỗi khi cập nhật logo: " + e.getMessage());
         }
+    }
+
+    
+    @GetMapping(value = "/lessthan7days")
+    public Object lessThanSevenDay() {
+        return carService.lessThanSevenDay();
+    }
+
+    // ✅ Hàm lấy danh sách top 10 xe (Từ nhánh ThanhNha)
+    @GetMapping(value = "/topTen")
+    public Object topTen() {
+        return carService.topTen();
     }
 }
