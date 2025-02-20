@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 
 
+
 @Entity
 public class StaffEntity extends UserEntity {
 	

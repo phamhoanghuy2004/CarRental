@@ -5,9 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import javax.mail.MessagingException;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +22,10 @@ import com.javaweb.entity.UserEntity;
 import com.javaweb.service.UserService;
 import com.javaweb.util.EmailService;
 import com.javaweb.util.OTPGenerate;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 
 @RestController
